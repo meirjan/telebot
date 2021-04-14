@@ -1,0 +1,17 @@
+import telebot
+token = 
+bot = telebot.TeleBot(token)
+
+@bot.message_handler(commands = ['start'])
+def welcome(message):
+	bot.send_message(message.chat.id, "Hello and welcome I'm echobot")
+
+@bot.message_handler(content_types = ['text'])
+def message(message):
+	ms = message.text
+	ms = ms.replace("^", "**")
+	ms = ms.replace("/", "")
+	bot.send_message(message.chat.id, eval(ms))
+	bot.send_message(message.chat.id, message.text)
+
+bot.polling()
